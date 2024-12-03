@@ -1,0 +1,17 @@
+<div class="job-board">
+    <h1>Job Board</h1>
+  
+    
+    <ul>
+      <li *ngFor="let job of jobService.jobs()">
+        <h2>
+          <a *ngIf="job.url; else noLink" [href]="job.url" target="_blank">{{ job.title }}</a>
+          <ng-template #noLink>{{ job.title }}</ng-template>
+        </h2>
+        <p>{{ job.time }}</p>
+      </li>
+    </ul>
+  
+    
+    <button *ngIf="jobService.jobs().length % limit === 0" (click)="loadMore()">Load More</button>
+  </div>
