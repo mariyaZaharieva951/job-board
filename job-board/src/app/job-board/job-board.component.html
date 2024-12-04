@@ -1,5 +1,5 @@
 <div class="job-board">
-    <h1>Job Board</h1>
+    <h1>Hacker News Jobs Board</h1>
   
     
     <ul>
@@ -8,7 +8,7 @@
           <a *ngIf="job.url; else noLink" [href]="job.url" target="_blank">{{ job.title }}</a>
           <ng-template #noLink>{{ job.title }}</ng-template>
         </h2>
-        <p>{{ job.time }}</p>
+        <p>{{ job.time | date:'medium'}}</p>
       </li>
     </ul>
   

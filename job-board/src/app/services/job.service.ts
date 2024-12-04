@@ -13,7 +13,7 @@ export class JobService {
   constructor(private http: HttpClient) {}
 
   
-  jobs: Signal<any[]> = signal([]);
+  jobs = signal<any[]>([]);
 
 
   loadJobs(start: number, limit: number): void {
@@ -26,8 +26,9 @@ export class JobService {
         )
       )
       .subscribe((newJobs) => {
-        const currentJobs = this.jobs();
-        // this.jobs.set([...currentJobs, ...newJobs]);
+      
+        this.jobs.update((currentJobs) => [...currentJobs, ...newJobs]);
+       
       });
   }
 }
