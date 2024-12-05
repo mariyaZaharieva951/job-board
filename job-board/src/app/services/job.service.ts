@@ -26,9 +26,27 @@ export class JobService {
         )
       )
       .subscribe((newJobs) => {
+        this.jobs.update((currentJobs) => [...currentJobs, ...newJobs]); 
+      });
       
-        this.jobs.update((currentJobs) => [...currentJobs, ...newJobs]);
-       
+      
+  }
+
+
+
+  filterJobs(titleFilter: string = '', dateFilter?: Date): any[] {
+    const lowerCaseTitleFilter = titleFilter.toLowerCase();
+
+    if (!titleFilter && !dateFilter) {
+      return this.jobs();
+    }  
+    
+    return this.jobs()
+      .filter((job) => {
+        const matchesTitle = job.title?.toLowerCase().includes(lowerCaseTitleFilter);
+        const matchesDate = dateFilter ? new Date(job.time) >= dateFilter : true;
+
+        return matchesTitle && matchesDate;
       });
   }
 }

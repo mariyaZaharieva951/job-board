@@ -1,9 +1,23 @@
 <div class="job-board">
     <h1>Hacker News Jobs Board</h1>
   
+    <div>
+      <input
+        type="text"
+        [(ngModel)]="filterText"
+        (ngModelChange)="onFilterChange()"
+        placeholder="Filter by title"
+      />
+      <!-- <input
+        type="date"
+        [(ngModel)]="filterDate"
+        (ngModelChange)="onFilterChange()"
+        placeholder="Filter by date"
+      /> -->
+    </div>
     
     <ul>
-      <li *ngFor="let job of jobService.jobs()">
+      <li *ngFor="let job of (filteredJobs.length ? filteredJobs : jobService.jobs())">
         <h2>
           <a *ngIf="job.url; else noLink" [href]="job.url" target="_blank">{{ job.title }}</a>
           <ng-template #noLink>{{ job.title }}</ng-template>
