@@ -1,7 +1,8 @@
 <div class="job-board">
     <h1>Hacker News Jobs Board</h1>
   
-    <div>
+    <div class="flex flex-row justify-between">
+        <div>
       <input
         type="text"
         [(ngModel)]="filterText"
@@ -14,8 +15,15 @@
         (ngModelChange)="onFilterChange()"
         placeholder="Filter by date"
       /> -->
+        </div>
+
+        <div>
+          <!-- <a routerLink="/login">Login</a> -->
+          <a routerLink="/register">Register</a>
+        </div>
+
     </div>
-    
+
     <ul>
       <li *ngFor="let job of (filteredJobs.length ? filteredJobs : jobService.jobs())">
         <h2>
