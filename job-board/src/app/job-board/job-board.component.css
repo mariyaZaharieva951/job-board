@@ -45,3 +45,21 @@
   button:hover {
     background-color: #0056b3;
   }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .user {
+    display: flex;
+    gap:1rem;
+  }
+
+  .log,.reg {
+    text-decoration:none;
+    text-transform: uppercase;
+    border: 2px solid black;
+    border-radius:7px;
+    padding:3px 5px;
+  }
