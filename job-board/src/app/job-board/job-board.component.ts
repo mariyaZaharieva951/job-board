@@ -7,7 +7,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-job-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './job-board.component.html',
   styleUrls: ['./job-board.component.css'],
 })
