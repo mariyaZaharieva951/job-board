@@ -23,4 +23,8 @@
       </div>
       <button type="submit">Login</button>
     </form>
+    <p *ngIf="error">{{ error }}</p>
+    <div *ngIf="success" class="success-message">
+      {{ success }}
+    </div>
   </div>

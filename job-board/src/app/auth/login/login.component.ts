@@ -14,13 +14,25 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   error: string | null = null;
+  success: string | null = null;
 
   constructor(private authService: AuthService) {}
 
-  // onLogin() {
-  //   const success = this.authService.login(this.email, this.password);
-  //   if (!success) {
-  //     this.error = 'Invalid email or password!';
-  //   }
-  // }
+  onLogin() {
+    this.authService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        if (response) {
+          this.success = 'Login successful!';
+          
+          //this.router.navigate(['/']);
+        } else {
+          this.error = 'Login failed. Please try again!';
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.error = 'An error occurred during login.';
+      },
+    });
+  }
 }

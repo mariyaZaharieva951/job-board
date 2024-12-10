@@ -15,6 +15,7 @@ export class AuthService {
   // private users = signal<{ email: string; password: string }[]>([]); 
 
   private _user = signal<User | null>(null);
+  private _token = signal<string | null>(null);
 
 
   constructor(private http: HttpClient) {}
@@ -56,6 +57,23 @@ export class AuthService {
     
   }
 
+  login(email: string, password: string) {
+    const body = { email, password };
+
+    return this.http.post<User>('https://fakestoreapi.com/auth/login', body).pipe(
+      tap(response => {
+        localStorage.setItem('token', response.token || '');
+        this._user.set(response);
+        this._token.set(response.token || ''); 
+        return response; 
+      }),
+      catchError((err) => {
+        console.error('Login failed', err);
+        return of(null); 
+      })
+    );
+  }
+
   logout(): void {
     this.loggedIn.set(false);
   }
@@ -66,5 +84,9 @@ export class AuthService {
 
   get currentUser() {
     return this._user;
+  }
+
+  get currentToken() {
+    return this._token;
   }
 }

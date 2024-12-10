@@ -24,6 +24,7 @@ export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   onRegister() {
+    
     if (this.password !== this.confirmPassword) {
       this.error = 'Passwords do not match!';
       return;
