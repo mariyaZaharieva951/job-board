@@ -17,10 +17,10 @@ export class LoginComponent {
 
   constructor(private authService: AuthService) {}
 
-  onLogin() {
-    const success = this.authService.login(this.email, this.password);
-    if (!success) {
-      this.error = 'Invalid email or password!';
-    }
-  }
+  // onLogin() {
+  //   const success = this.authService.login(this.email, this.password);
+  //   if (!success) {
+  //     this.error = 'Invalid email or password!';
+  //   }
+  // }
 }

@@ -13,4 +13,7 @@
       <button type="submit">Register</button>
     </form>
     <p *ngIf="error">{{ error }}</p>
+    <div *ngIf="success" class="success-message">
+      {{ success }}
+    </div>
 </div>

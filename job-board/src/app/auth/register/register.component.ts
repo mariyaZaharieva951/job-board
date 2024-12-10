@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
@@ -14,9 +14,12 @@ export class RegisterComponent {
 
 
   email = '';
+  username = '';
   password = '';
   confirmPassword = '';
   error: string | null = null;
+  success: string | null = null;
+
 
   constructor(private authService: AuthService) {}
 
@@ -26,9 +29,22 @@ export class RegisterComponent {
       return;
     }
 
-    const success = this.authService.register(this.email, this.password);
-    if (!success) {
-      this.error = 'Registration failed! Email might already be in use.';
-    }
+    this.authService.register(this.email, this.username, this.password).subscribe({
+      next: (response) => {
+        if (response) {
+          this.success = 'Registration successful!';
+          
+          //this.router.navigate(['/']);
+        } else {
+          this.error = 'Registration failed. Please try again!';
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.error = 'An error occurred during registration.';
+      },
+    });
   }
+    
+  
 }
