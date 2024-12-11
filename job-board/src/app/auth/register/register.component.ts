@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { passwordMatchValidator } from '../validators/passwordMatchValidator';
 
 @Component({
   selector: 'app-register',
@@ -20,11 +21,13 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private fb:FormBuilder) {
 
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required]],  
-      username: ['', [Validators.required]], 
-      password: ['', [Validators.required]],  
+      email: ['', [Validators.required, Validators.email]],  
+      username: ['', [Validators.required, Validators.minLength(3)]], 
+      password: ['', [Validators.required, Validators.minLength(6)]],  
       confirmPassword: ['', [Validators.required]],
-    });
+    },
+    { validators: passwordMatchValidator() } 
+  );
   }
 
   

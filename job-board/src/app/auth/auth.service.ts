@@ -36,8 +36,8 @@ export class AuthService {
     
   }
 
-  login(email: string, password: string) {
-    const body = { email, password };
+  login(email: string, username:string, password: string) {
+    const body = { email, username, password };
 
     return this.http.post<User>('https://fakestoreapi.com/auth/login', body).pipe(
       tap(response => {
