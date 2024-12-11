@@ -11,8 +11,6 @@ export class AuthService {
   private apiUrl = 'https://fakestoreapi.com/users'; //For test
 
   private loggedIn = signal(false);
-  // private currentUser = signal<string | null>(null);
-  // private users = signal<{ email: string; password: string }[]>([]); 
 
   private _user = signal<User | null>(null);
   private _token = signal<string | null>(null);
@@ -21,27 +19,8 @@ export class AuthService {
   constructor(private http: HttpClient) {}
   
 
-  // login(email: string, password: string): boolean {
-  //   const user = this.users().find((u) => u.email === email && u.password === password);
-  //   if (user) {
-  //     this.loggedIn.set(true);
-  //     this.currentUser.set(email);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  register(email: string, username:string, password: string) 
-  //:boolean 
-  {
-    // const existingUser = this.users().find((u) => u.email === email);
-    // if (existingUser) {
-    //   return false; 
-    // }
-
-    // this.users.update((currentUsers) => [...currentUsers, { email, password }]);
-    // return true;
-    
+  register(email: string, username:string, password: string) {
+   
     const body = {email, username, password}
 
     return this.http.post<User>('https://fakestoreapi.com/users', body).pipe(
