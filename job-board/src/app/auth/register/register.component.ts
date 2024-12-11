@@ -50,6 +50,7 @@ export class RegisterComponent {
       error: (err) => {
         console.error(err);
         this.error = 'An error occurred during registration.';
+        this.registerForm.reset();
       },
     });
   }
